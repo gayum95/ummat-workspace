@@ -1,0 +1,4 @@
+Bundle-Name: ummat-travel-auth
+Bundle-SymbolicName: com.ummat.auth
+Bundle-Version: 1.0.0
+Export-Package: com.ummat.auth.constants

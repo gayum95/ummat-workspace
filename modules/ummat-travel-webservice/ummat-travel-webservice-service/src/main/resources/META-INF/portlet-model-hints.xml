@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="ummat.travel.webservice.model.DriverDetail">
+		<field name="driverId" type="long" />
+		<field name="userId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="driverName" type="String" />
+		<field name="age" type="String" />
+		<field name="Password" type="String" />
+		<field name="mobileNumber" type="String" />
+		<field name="email" type="String" />
+		<field name="gender" type="String" />
+		<field name="driverPhoto" type="String" />
+		<field name="aadharNumber" type="String" />
+		<field name="drivingLicenceId" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+	</model>
+	<model name="ummat.travel.webservice.model.TravelUser">
+		<field name="uuid" type="String" />
+		<field name="travelUserId" type="long" />
+		<field name="userId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="travelUserName" type="String" />
+		<field name="travelUserEmail" type="String" />
+		<field name="travelUserPhoneNumber" type="String" />
+		<field name="travelUserGender" type="String" />
+		<field name="travelUserAddress" type="String" />
+		<field name="travelUserProfile" type="String" />
+		<field name="travelUserPassword" type="String" />
+		<field name="country" type="long" />
+		<field name="state" type="String" />
+		<field name="district" type="long" />
+		<field name="area" type="String" />
+		<field name="pincode" type="long" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+	</model>
+</model-hints>

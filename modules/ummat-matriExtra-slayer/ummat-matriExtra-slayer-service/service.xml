@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.4.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_4_0.dtd">
+
+<service-builder dependency-injector="ds"
+	package-path="ummat.matriExtra.slayer">
+	<namespace>MatriExtra</namespace>
+	<!--<entity data-source="sampleDataSource" local-service="true" name="Foo" 
+		remote-service="false" session-factory="sampleSessionFactory" table="foo" 
+		tx-manager="sampleTransactionManager uuid="true""> -->
+	<entity local-service="true" name="MatriUserImage"
+		remote-service="true" uuid="true">
+		<column name="MatriImageId" type="long" primary="true" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="MatriUserId" type="long" />
+		<column name="imageOne" type="Blob" />
+		<column name="imageTwo" type="Blob" />
+		<column name="imageThree" type="Blob" />
+		<column name="imageFour" type="Blob" />
+		
+		<finder name="FindByMatriExtraImages"
+			return-type="MatriUserImages">
+			<finder-column name="MatriUserId" />
+		</finder>
+			<finder name="FindByMatriExtraImagesUserId"
+			return-type="MatriUserImages">
+			<finder-column name="userId" />
+		</finder>
+	</entity>
+</service-builder>

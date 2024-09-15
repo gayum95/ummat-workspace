@@ -1,0 +1,10 @@
+Bundle-Name: ummat-travel-webservice-api
+Bundle-SymbolicName: ummat.travel.webservice.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	ummat.travel.webservice.exception,\
+	ummat.travel.webservice.model,\
+	ummat.travel.webservice.service,\
+	ummat.travel.webservice.service.persistence
+-check: EXPORTS
+-includeresource: META-INF/service.xml=../ummat-travel-webservice-service/service.xml

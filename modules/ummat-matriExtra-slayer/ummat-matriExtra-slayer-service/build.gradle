@@ -1,0 +1,11 @@
+dependencies {
+	compile project(":modules:ummat-matriExtra-slayer:ummat-matriExtra-slayer-api")
+
+	compileOnly group: "com.liferay.portal", name: "release.portal.api"
+}
+
+buildService {
+	apiDir = "../ummat-matriExtra-slayer-api/src/main/java"
+}
+
+group = "ummat.matriExtra.slayer"

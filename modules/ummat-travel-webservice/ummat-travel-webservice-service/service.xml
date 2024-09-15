@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.4.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_4_0.dtd">
+<service-builder dependency-injector="ds"
+	package-path="ummat.travel.webservice">
+	<namespace>UMMATLife</namespace>
+	<entity local-service="true" name="TravelUser"
+		remote-service="true" uuid="true">
+		<column name="travelUserId" primary="true" type="long" />
+		<column name="userId" type="long" />
+		<column name="companyId" type="long" />
+		<column name="travelUserName" type="String" />
+		<column name="travelUserEmail" type="String" />
+		<column name="travelUserPhoneNumber" type="String" />
+		<column name="travelUserGender" type="String" />
+		<column name="travelUserAddress" type="String" />
+		<column name="travelUserProfile" type="String" />
+		<column name="travelUserPassword" type="String" />
+		<column name="country" type="long" />
+		<column name="state" type="String" />
+		<column name="district" type="long" />
+		<column name="area" type="String" />
+		<column name="pincode" type="long" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+		<finder name="findByTravelUserId" return-type="Collection">
+			<finder-column name="travelUserId" />
+		</finder>
+
+		<finder name="findByTravelUserPhoneNumber"
+			return-type="Collection">
+			<finder-column name="travelUserPhoneNumber" />
+		</finder>
+
+		<finder name="findByUserEmail" return-type="Collection">
+			<finder-column name="travelUserEmail" />
+		</finder>
+		<finder return-type="Collection" name="Find_TravelUsers">
+			<finder-column name="userId"></finder-column>
+			<finder-column name="companyId"></finder-column>
+		</finder>
+		<finder name="UserId" return-type="Collection">
+			<finder-column name="userId" />
+		</finder>
+		<finder name="findByArea" return-type="Collection">
+			<finder-column name="area" />
+		</finder>
+		<finder name="findByDistrict" return-type="Collection">
+			<finder-column name="district" />
+		</finder>
+		<finder name="findByDistricAndAreat" return-type="Collection">
+			<finder-column name="district" />
+			<finder-column name="area" />
+		</finder>
+	</entity>
+
+	<entity local-service="true" name="DriverDetail"
+		remote-service="true">
+		<column name="driverId" type="long" id-type="increment"
+			primary="true" />
+		<column name="userId" type="long" />
+		<column name="companyId" type="long" />
+		<column name="driverName" type="String" />
+		<column name="age" type="String" />
+		<column name="Password" type="String" />
+		<column name="mobileNumber" type="String" />
+		<column name="email" type="String" />
+		<column name="gender" type="String" />
+		<column name="driverPhoto" type="String" />
+		<column name="aadharNumber" type="String" />
+		<column name="drivingLicenceId" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<finder name="findByDriverId" return-type="DriverDetail">
+			<finder-column name="driverId" />
+		</finder>
+		<finder return-type="DriverDetail" name="Find_DriverDetail">
+			<finder-column name="userId"></finder-column>
+			<finder-column name="companyId"></finder-column>
+		</finder>
+	</entity>
+</service-builder>

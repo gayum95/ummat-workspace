@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping auto-import="false" default-lazy="false">
+	<import class="ummat.matriExtra.slayer.model.MatriUserImage" />
+	<class name="ummat.matriExtra.slayer.model.impl.MatriUserImageImpl" table="MatriExtra_MatriUserImage">
+		<id access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="MatriImageId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" column="uuid_" name="uuid" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="MatriUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<one-to-one access="com.liferay.portal.dao.orm.hibernate.PrivatePropertyAccessor" cascade="save-update" class="ummat.matriExtra.slayer.model.MatriUserImageImageOneBlobModel" constrained="false" name="imageOneBlobModel" outer-join="false" />
+		<one-to-one access="com.liferay.portal.dao.orm.hibernate.PrivatePropertyAccessor" cascade="save-update" class="ummat.matriExtra.slayer.model.MatriUserImageImageTwoBlobModel" constrained="false" name="imageTwoBlobModel" outer-join="false" />
+		<one-to-one access="com.liferay.portal.dao.orm.hibernate.PrivatePropertyAccessor" cascade="save-update" class="ummat.matriExtra.slayer.model.MatriUserImageImageThreeBlobModel" constrained="false" name="imageThreeBlobModel" outer-join="false" />
+		<one-to-one access="com.liferay.portal.dao.orm.hibernate.PrivatePropertyAccessor" cascade="save-update" class="ummat.matriExtra.slayer.model.MatriUserImageImageFourBlobModel" constrained="false" name="imageFourBlobModel" outer-join="false" />
+	</class>
+	<class lazy="true" name="ummat.matriExtra.slayer.model.MatriUserImageImageOneBlobModel" table="MatriExtra_MatriUserImage">
+		<id column="MatriImageId" name="MatriImageId">
+			<generator class="foreign">
+				<param name="property">ummat.matriExtra.slayer.model.impl.MatriUserImageImpl</param>
+			</generator>
+		</id>
+		<property column="imageOne" name="imageOneBlob" type="blob" />
+	</class>
+	<class lazy="true" name="ummat.matriExtra.slayer.model.MatriUserImageImageTwoBlobModel" table="MatriExtra_MatriUserImage">
+		<id column="MatriImageId" name="MatriImageId">
+			<generator class="foreign">
+				<param name="property">ummat.matriExtra.slayer.model.impl.MatriUserImageImpl</param>
+			</generator>
+		</id>
+		<property column="imageTwo" name="imageTwoBlob" type="blob" />
+	</class>
+	<class lazy="true" name="ummat.matriExtra.slayer.model.MatriUserImageImageThreeBlobModel" table="MatriExtra_MatriUserImage">
+		<id column="MatriImageId" name="MatriImageId">
+			<generator class="foreign">
+				<param name="property">ummat.matriExtra.slayer.model.impl.MatriUserImageImpl</param>
+			</generator>
+		</id>
+		<property column="imageThree" name="imageThreeBlob" type="blob" />
+	</class>
+	<class lazy="true" name="ummat.matriExtra.slayer.model.MatriUserImageImageFourBlobModel" table="MatriExtra_MatriUserImage">
+		<id column="MatriImageId" name="MatriImageId">
+			<generator class="foreign">
+				<param name="property">ummat.matriExtra.slayer.model.impl.MatriUserImageImpl</param>
+			</generator>
+		</id>
+		<property column="imageFour" name="imageFourBlob" type="blob" />
+	</class>
+</hibernate-mapping>

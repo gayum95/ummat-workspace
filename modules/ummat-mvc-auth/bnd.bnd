@@ -1,0 +1,4 @@
+Bundle-Name: ummat-mvc-auth
+Bundle-SymbolicName: ummat.users.auth
+Bundle-Version: 1.0.0
+Export-Package: ummat.users.auth.constants

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="ummat.matriExtra.slayer.model.MatriUserImage">
+		<field name="uuid" type="String" />
+		<field name="MatriImageId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="MatriUserId" type="long" />
+		<field name="imageOne" type="Blob" />
+		<field name="imageTwo" type="Blob" />
+		<field name="imageThree" type="Blob" />
+		<field name="imageFour" type="Blob" />
+	</model>
+</model-hints>

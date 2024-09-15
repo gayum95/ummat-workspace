@@ -1,0 +1,10 @@
+Bundle-Name: ummat-matriExtra-slayer-api
+Bundle-SymbolicName: ummat.matriExtra.slayer.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	ummat.matriExtra.slayer.exception,\
+	ummat.matriExtra.slayer.model,\
+	ummat.matriExtra.slayer.service,\
+	ummat.matriExtra.slayer.service.persistence
+-check: EXPORTS
+-includeresource: META-INF/service.xml=../ummat-matriExtra-slayer-service/service.xml
