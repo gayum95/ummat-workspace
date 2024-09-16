@@ -1,29 +1,4 @@
-<%@page import="com.liferay.portal.kernel.portlet.LiferayPortletResponse"%>
-<%@page import="javax.portlet.PortletURL"%>
-<%@page import="com.liferay.portal.kernel.util.ParamUtil"%>
-<%@page
-	import="com.liferay.portal.kernel.service.RegionLocalServiceUtil"%>
-<%@page import="com.liferay.portal.kernel.model.Region"%>
-<%@page import="ummat_startup_details.service.MatriUserLocalServiceUtil"%>
-<%@page import="ummat_startup_details.model.MatriUser"%>
-
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.util.Date"%>
-<%@page import="com.liferay.portal.kernel.theme.ThemeDisplay"%>
-<%@page
-	import="com.liferay.portal.kernel.service.UserGroupLocalServiceUtil"%>
-<%@page import="com.liferay.headless.admin.user.dto.v1_0.UserGroup"%>
-<%@page import="com.liferay.portal.kernel.model.Groups_UserGroupsTable"%>
-<%@page import="com.liferay.portal.kernel.service.UserLocalServiceUtil"%>
-<%@page import="com.liferay.portal.kernel.util.Validator"%>
-<%@page import="com.ummat.slayer.model.District"%>
-<%@page import="com.liferay.headless.admin.user.dto.v1_0.UserGroup"%>
-<%@ page import="javax.portlet.PortletURL" %>
-<%@ page import="com.liferay.portal.kernel.portlet.LiferayPortletResponse" %>
-
-<%@page import="java.io.Serializable"%>
-<%@page import="com.liferay.portal.kernel.model.User"%>
-<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <%@ include file="../init.jsp"%>
 <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/matrilist.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -32,22 +7,30 @@
 <%
 	PortletURL informationRenderURL = renderResponse.createRenderURL();
     informationRenderURL.setParameter("jspPage","/Matri/ProfileDetails.jsp" );
-    List<District> districtList = (List) request.getAttribute("districtLists");
-	List<Region> regionsForCountry  = (List)request.getAttribute("regionLists");
+    List<District> districtList = new ArrayList<>();
+    List<Region> regionsForCountry = new ArrayList<>();
+    
+    if(Validator.isNotNull(request.getAttribute("districtLists"))){
+    	districtList = (List) request.getAttribute("districtLists");
+    	
+    }
+    
+    if(Validator.isNotNull(request.getAttribute("regionLists"))){
+    	regionsForCountry =  (List)request.getAttribute("regionLists");
+    }
+    
+    List<Long> excludedProfileIds = List.of();
+	List<User> currentProfiles = (List) request.getAttribute("currentProfilesSearch");
+	if (Validator.isNull(currentProfiles)) {
+		currentProfiles = (List) request.getAttribute("currentProfiles");
+	}
+	  //  List<MatriUser> matriUserList = MatriUserLocalServiceUtil.getMatriUsers(-1, -1);
+      List<MatriUser> matriUserList = (List) request.getAttribute("matriUserList");
+    System.out.println("Size of matriUserList: " + matriUserList.size());
+    
+	
 	%>
-<%
-		/*  String contextPath = request.getContextPath(); 
-		 String informationRenderURL = contextPath + "/userinfo/ProfileInfo.jsp";  */
 
-		List<Long> excludedProfileIds = List.of();
-		List<User> currentProfiles = (List) request.getAttribute("currentProfilesSearch");
-		if (Validator.isNull(currentProfiles)) {
-			currentProfiles = (List) request.getAttribute("currentProfiles");
-		}
-		  //  List<MatriUser> matriUserList = MatriUserLocalServiceUtil.getMatriUsers(-1, -1);
-	      List<MatriUser> matriUserList = (List) request.getAttribute("matriUserList");
-	    System.out.println("Size of matriUserList: " + matriUserList.size());
-	%>
 <div class="first-div" id="filter-bar">
   <div class="logo">Find Your Partner</div>
     <input type="text"  id="searchProfile" placeholder="Search Profile ID..." />
@@ -203,23 +186,28 @@ AUI().use('aui-base', 'aui-io-request', function(A) {
 <div class="second-div">
     <ul class="card-list pager" id="userList">
         <% 
+        
+        
             
             int pageSize = 10; 
             int totalPages = (int) Math.ceil((double) matriUserList.size() / pageSize);
             int currentPage = ParamUtil.getInteger(request, "page", 1);
             
-          
+         
             int startIndex = (currentPage - 1) * pageSize;
             int endIndex = Math.min(startIndex + pageSize, matriUserList.size());
 
-           
+          
             List<MatriUser> currentPageUsers = matriUserList.subList(startIndex, endIndex);
             for (MatriUser matrimonyUser : currentPageUsers) {
                 long userId = matrimonyUser.getUserId();
-                User userItems = UserLocalServiceUtil.getUser(userId);
-
+                User userItems = UserLocalServiceUtil.fetchUser(userId);
+                
+                
+                
                 // Check if the user ID is not excluded
-                if (!excludedProfileIds.contains(userId)) {
+                if (Validator.isNotNull(userItems) && !excludedProfileIds.contains(userId)) {
+                	
         %>
         <li class="card-list-item">
             <div class="card">
@@ -235,6 +223,7 @@ AUI().use('aui-base', 'aui-io-request', function(A) {
                         <%-- Format the date of profile creation --%>
                         <% 
                             Date createDate = userItems.getCreateDate();
+                            
                             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                             String formattedDate = dateFormat.format(createDate); 
                         %>

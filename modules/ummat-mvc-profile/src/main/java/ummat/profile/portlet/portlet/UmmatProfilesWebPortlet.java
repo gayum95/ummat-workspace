@@ -91,22 +91,27 @@ public class UmmatProfilesWebPortlet extends MVCPortlet {
 		renderRequest.setAttribute("districtLists", districts);
 		renderRequest.setAttribute("currentProfiles", currentProfileList);
 		renderRequest.setAttribute("matriUserList", matriUserList);
-		String countryCode = "IN";
 		Country country = null;
 		try {
-			country = CountryLocalServiceUtil.getCountryByA2(20096, countryCode);
+			country = CountryLocalServiceUtil.getCountryByA2(themeDisplay.getCompanyId(), 
+					UmmatProfilesWebPortletKeys.INDIA_COUNTRY_CODE);
+			
 		} catch (PortalException e) {
 
 			e.printStackTrace();
 			renderRequest.setAttribute("error", "Error fetching country: " + e.getMessage());
 		}
-
+		
+		
 		if (country != null) {
-			long countryId = country.getCountryId();
-			DynamicQuery dynamicQuery = RegionLocalServiceUtil.dynamicQuery();
-			dynamicQuery.add(RestrictionsFactoryUtil.eq("countryId", countryId));
-			List<Region> regions = RegionLocalServiceUtil.dynamicQuery(dynamicQuery);
-			renderRequest.setAttribute("regionLists", regions);
+			
+			try {
+				List<Region>  regions = RegionLocalServiceUtil.getRegions(country.getCountryId(), true);
+				renderRequest.setAttribute("regionLists", regions);
+			} catch (PortalException e) {
+				logger.error("Exception Occured "+e.getLocalizedMessage());
+			}
+			
 		}
 
 		super.doView(renderRequest, renderResponse);
