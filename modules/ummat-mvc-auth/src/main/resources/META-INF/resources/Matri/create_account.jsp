@@ -1,28 +1,4 @@
-<%@page import="com.liferay.portal.kernel.model.Contact"%>
-<%@page import="com.liferay.portal.kernel.util.PropsKeys"%>
-<%@page import="com.liferay.portal.kernel.util.PrefsPropsUtil"%>
-<%@page import="com.liferay.portal.kernel.util.Validator"%>
-<%@page import="com.liferay.portal.kernel.service.RegionLocalServiceUtil"%>
-<%@page import="com.liferay.portal.kernel.model.Region"%>
-<%@page import="com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil"%>
-<%@ page import="com.liferay.portal.kernel.dao.orm.DynamicQuery" %>
-<%@page
-	import="com.liferay.portal.security.auth.ScreenNameValidatorFactory"%>
-<%@page
-	import="com.liferay.portal.kernel.security.auth.ScreenNameValidator"%>
-<%@page import="com.liferay.portal.kernel.util.Constants"%>
-<%@page import="com.liferay.portal.kernel.language.LanguageUtil"%>
-<%@page import="com.liferay.portal.kernel.portlet.LiferayWindowState"%>
-<%@page import="com.liferay.portal.util.PropsValues"%>
-<%@page import="com.liferay.portal.kernel.util.CalendarFactoryUtil"%>
-<%@page import="java.util.Calendar"%>
-<%@page import="com.liferay.portal.kernel.util.ParamUtil"%>
-<%@page import="java.util.List"%>
-<%@page
-	import="com.liferay.portal.kernel.service.CountryLocalServiceUtil"%>
-<%@page import="com.liferay.portal.kernel.model.Country"%>
 <%@ include file="../init.jsp"%>
-<%@ taglib uri="http://liferay.com/tld/expando" prefix="liferay-expando"%>
 <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/matricreate.css">
 <%
 	String redirect = ParamUtil.getString(request, "redirect");
@@ -36,7 +12,18 @@
 	birthdayCalendar.set(Calendar.YEAR, 1970);
 
 	renderResponse.setTitle(LanguageUtil.get(request, "create-account"));
+	
+	List<ListTypeEntry> educationsList = (List<ListTypeEntry>) request.getAttribute("educations");
+	List<ListTypeEntry> jamathList = (List<ListTypeEntry>) request.getAttribute("jamaths");
+	List<ListTypeEntry> maritalStatusList = (List<ListTypeEntry>) request.getAttribute("maritalStatus");
+	List<ListTypeEntry> colorsList = (List<ListTypeEntry>) request.getAttribute("colors");
+	List<ListTypeEntry> occupationsList = (List<ListTypeEntry>) request.getAttribute("occupations");
+	List<ListTypeEntry> motherTongueList = (List<ListTypeEntry>) request.getAttribute("motherTongueLangs");
+	List<ListTypeEntry> heightList = (List<ListTypeEntry>) request.getAttribute("heights");
 %>
+
+<portlet:resourceURL id="POPULATE_DISTRICT" var="districtUrl"/>
+<portlet:resourceURL id="POPULATE_LOCALITY" var="localityUrl"/>
 
 <portlet:actionURL name="/login/create_account" var="createAccountURL"
 	windowState="<%=LiferayWindowState.MAXIMIZED.toString()%>">
@@ -157,13 +144,13 @@
 
 
 									<div class="form-group">
-										<aui:select label="Jamath" name="jamath" id="jamath">
+										<aui:select label="jamath" name="jamath" id="jamath">
 											<aui:option value="">Select Jamath</aui:option>
-											<aui:option label="Sunnathwal Jamath"
-												value="Sunnathwal Jamath" />
-											<aui:option label="Thowheed Jamath" value="Thowheed Jamath" />
-											<aui:option label="TNTJ" value="TNTJ" />
-											<aui:option label="Others" value="Others" />
+											<%
+												for(ListTypeEntry jamath: jamathList){
+											%>
+												<aui:option label="<%= jamath.getName(themeDisplay.getLocale()) %>" value="<%= jamath.getKey() %>" />
+											<%} %>
 										</aui:select>
 									</div>
 									
@@ -175,15 +162,17 @@
 									
 									
 									
-									<div class="form-group" label="Marital Status"
+									<div class="form-group" label="marital-status"
 										name="maritalStatus">
 										<aui:select label="Marital Status" name="maritalStatus"
 											id="maritalStatus">
 											<aui:option value="">Select Marital Status</aui:option>
-											<aui:option label="Single" value="Single" />
-											<aui:option label="Divorced" value="Divorced" />
-											<aui:option label="Widowed" value="Widowed" />
-											<aui:option label="Separated" value="Separated" />
+											<%
+												for(ListTypeEntry maritalStatus: maritalStatusList){
+											%>
+												<aui:option label="<%= maritalStatus.getName(themeDisplay.getLocale()) %>" value="<%= maritalStatus.getKey() %>" />
+											<%} %>
+											
 										</aui:select>
 									</div>
 									
@@ -202,40 +191,15 @@
 									<div class="form-group">
 
 										
-<aui:select label="Education" name="education" id="education" multiple="multiple" >
-    <aui:validator name="required" />
-    <aui:option value="Aflalul Ulama">Aflalul Ulama</aui:option>
-    <aui:option value="Bachelors- Arts/science/commerce/others">Bachelors- Arts/science/commerce/others</aui:option>
-    <aui:option value="Bachelors- Engineering">Bachelors- Engineering</aui:option>
-    <aui:option value="Bachelors- Law">Bachelors- Law</aui:option>
-    <aui:option value="Bachelors- Media">Bachelors- Media</aui:option>
-    <aui:option value="Bachelors- Nursing-Paramedical">Bachelors- Nursing-Paramedical</aui:option>
-    <aui:option value="Bachelors-Management">Bachelors-Management</aui:option>
-    <aui:option value="BEd">BEd</aui:option>
-    <aui:option value="BPharm">BPharm</aui:option>
-    <aui:option value="CA">CA</aui:option>
-    <aui:option value="Diploma">Diploma</aui:option>
-    <aui:option value="Doctor">Doctor</aui:option>
-    <aui:option value="ICWA">ICWA</aui:option>
-    <aui:option value="ITC">ITC</aui:option>
-    <aui:option value="Less than Matriculation">Less than Matriculation</aui:option>
-    <aui:option value="Masters- Arts/science/commerce/others">Masters- Arts/science/commerce/others</aui:option>
-    <aui:option value="Masters- Engineering/Computers">Masters- Engineering/Computers</aui:option>
-    <aui:option value="Masters- Law">Masters- Law</aui:option>
-    <aui:option value="Masters- Media">Masters- Media</aui:option>
-    <aui:option value="Masters- Nursing-Paramedical">Masters- Nursing-Paramedical</aui:option>
-    <aui:option value="Masters-Management">Masters-Management</aui:option>
-    <aui:option value="Medical/health science">Medical/health science</aui:option>
-    <aui:option value="MPharm">MPharm</aui:option>
-    <aui:option value="NET">NET</aui:option>
-    <aui:option value="Others">Others</aui:option>
-    <aui:option value="PDC/ Plus two/ VHSE">PDC/ Plus two/ VHSE</aui:option>
-    <aui:option value="Phd">Phd</aui:option>
-    <aui:option value="SET">SET</aui:option>
-    <aui:option value="SSLC">SSLC</aui:option>
-    <aui:option value="TTC">TTC</aui:option>
-    <aui:option value="UGC">UGC</aui:option>
-</aui:select>
+							<aui:select label="education" name="education" id="education" multiple="multiple" >
+							    <aui:validator name="required" />
+							    <%
+							    	for(ListTypeEntry education : educationsList){
+							    %>
+							    	<aui:option value="<%= education.getKey() %>"><%= education.getName(themeDisplay.getLocale()) %></aui:option>
+							    <%} %>
+							    
+							</aui:select>
 
 
 									</div>
@@ -244,11 +208,12 @@
 
 										<aui:select label="color" name="color" id="color">
 											<aui:option value="">Select Skin Color</aui:option>
-										
-											<aui:option label="Whitesh" value="light" />
-											<aui:option label="black" value="black" />
-											<aui:option label="fair" value="brown" />
-											<aui:option label="average" value="olive" />
+											<%
+												for(ListTypeEntry color: colorsList){
+											%>
+												<aui:option label="<%= color.getName(themeDisplay.getLocale()) %>" value="<%= color.getKey() %>" />
+											<%} %>
+											
 										</aui:select>
 									</div>
 
@@ -285,106 +250,13 @@
 										<div class="form-group">
 
 	
-<aui:select name="occupation" label="Occupation" multiple="multiple" id="occupationSelect">
+<aui:select name="occupation" label="occupation" multiple="multiple" id="occupationSelect">
     <aui:validator name="required" />
-    <aui:option label="Banking Professional" value="Banking Professional" />
-    <aui:option label="Chartered Accountant" value="Chartered Accountant" />
-    <aui:option label="Company Secretary" value="Company Secretary" />
-    <aui:option label="Finance Professional" value="Finance Professional" />
-    <aui:option label="Investment Professional" value="Investment Professional" />
-    <aui:option label="Accounting Professional (Others)" value="Accounting Professional (Others)" />
-    <aui:option label="Admin Professional" value="Admin Professional" />
-    <aui:option label="Human Resources Professional" value="Human Resources Professional" />
-    <aui:option label="Actor" value="Actor" />
-    <aui:option label="Advertising Professional" value="Advertising Professional" />
-    <aui:option label="Entertainment Professional" value="Entertainment Professional" />
-    <aui:option label="Event Manager" value="Event Manager" />
-    <aui:option label="Media Professional" value="Media Professional" />
-    <aui:option label="Public Relations Professional" value="Public Relations Professional" />
-    <aui:option label="Farming" value="Farming" />
-    <aui:option label="Horticulturist" value="Horticulturist" />
-    <aui:option label="Agricultural Professional (Others)" value="Agricultural Professional (Others)" />
-    <aui:option label="Air Hostess / Flight Attendant" value="Air Hostess / Flight Attendant" />
-    <aui:option label="Pilot / Co-Pilot" value="Pilot / Co-Pilot" />
-    <aui:option label="Other Airline Professional" value="Other Airline Professional" />
-    <aui:option label="Architect" value="Architect" />
-    <aui:option label="Interior Designer" value="Interior Designer" />
-    <aui:option label="Landscape Architect" value="Landscape Architect" />
-    <aui:option label="Animator" value="Animator" />
-    <aui:option label="Commercial Artist" value="Commercial Artist" />
-    <aui:option label="Web / UX Designers" value="Web / UX Designers" />
-    <aui:option label="Artist (Others)" value="Artist (Others)" />
-    <aui:option label="Beautician" value="Beautician" />
-    <aui:option label="Fashion Designer" value="Fashion Designer" />
-    <aui:option label="Hairstylist" value="Hairstylist" />
-    <aui:option label="Jewellery Designer" value="Jewellery Designer" />
-    <aui:option label="Designer (Others)" value="Designer (Others)" />
-    <aui:option label="Customer Support / BPO / KPO Professional" value="Customer Support / BPO / KPO Professional" />
-    <aui:option label="IAS / IRS / IES / IFS" value="IAS / IRS / IES / IFS" />
-    <aui:option label="Indian Police Services (IPS)" value="Indian Police Services (IPS)" />
-    <aui:option label="Law Enforcement Employee (Others)" value="Law Enforcement Employee (Others)" />
-    <aui:option label="Airforce" value="Airforce" />
-    <aui:option label="Army" value="Army" />
-    <aui:option label="Navy" value="Navy" />
-    <aui:option label="Defense Services (Others)" value="Defense Services (Others)" />
-    <aui:option label="Lecturer" value="Lecturer" />
-    <aui:option label="Professor" value="Professor" />
-    <aui:option label="Research Assistant" value="Research Assistant" />
-    <aui:option label="Research Scholar" value="Research Scholar" />
-    <aui:option label="Teacher" value="Teacher" />
-    <aui:option label="Training Professional (Others)" value="Training Professional (Others)" />
-    <aui:option label="Civil Engineer" value="Civil Engineer" />
-    <aui:option label="Electronics / Telecom Engineer" value="Electronics / Telecom Engineer" />
-    <aui:option label="Mechanical / Production Engineer" value="Mechanical / Production Engineer" />
-    <aui:option label="Non IT Engineer (Others)" value="Non IT Engineer (Others)" />
-    <aui:option label="Chef / Sommelier / Food Critic" value="Chef / Sommelier / Food Critic" />
-    <aui:option label="Catering Professional" value="Catering Professional" />
-    <aui:option label="Hotel & Hospitality Professional (Others)" value="Hotel & Hospitality Professional (Others)" />
-    <aui:option label="Software Developer / Programmer" value="Software Developer / Programmer" />
-    <aui:option label="Software Consultant" value="Software Consultant" />
-    <aui:option label="Hardware & Networking professional" value="Hardware & Networking professional" />
-    <aui:option label="Software Professional (Others)" value="Software Professional (Others)" />
-    <aui:option label="Lawyer" value="Lawyer" />
-    <aui:option label="Legal Assistant" value="Legal Assistant" />
-    <aui:option label="Legal Professional (Others)" value="Legal Professional (Others)" />
-    <aui:option label="Dentist" value="Dentist" />
-    <aui:option label="Doctor" value="Doctor" />
-    <aui:option label="Medical Transcriptionist" value="Medical Transcriptionist" />
-    <aui:option label="Nurse" value="Nurse" />
-    <aui:option label="Pharmacist" value="Pharmacist" />
-    <aui:option label="Physician Assistant" value="Physician Assistant" />
-    <aui:option label="Physiotherapist / Occupational Therapist" value="Physiotherapist / Occupational Therapist" />
-    <aui:option label="Psychologist" value="Psychologist" />
-    <aui:option label="Surgeon" value="Surgeon" />
-    <aui:option label="Veterinary Doctor" value="Veterinary Doctor" />
-    <aui:option label="Therapist (Others)" value="Therapist (Others)" />
-    <aui:option label="Medical / Healthcare Professional (Others)" value="Medical / Healthcare Professional (Others)" />
-    <aui:option label="Other Paramedical" value="Other Paramedical" />
-    <aui:option label="Merchant Naval Officer" value="Merchant Naval Officer" />
-    <aui:option label="Mariner" value="Mariner" />
-    <aui:option label="Marketing Professional" value="Marketing Professional" />
-    <aui:option label="Sales Professional" value="Sales Professional" />
-    <aui:option label="Biologist / Botanist" value="Biologist / Botanist" />
-    <aui:option label="Physicist" value="Physicist" />
-    <aui:option label="Science Professional (Others)" value="Science Professional (Others)" />
-    <aui:option label="CxO / Chairman / Director / President" value="CxO / Chairman / Director / President" />
-    <aui:option label="VP / AVP / GM / DGM" value="VP / AVP / GM / DGM" />
-    <aui:option label="Sr. Manager / Manager" value="Sr. Manager / Manager" />
-    <aui:option label="Consultant / Supervisor / Team Leads" value="Consultant / Supervisor / Team Leads" />
-    <aui:option label="Team Member / Staff" value="Team Member / Staff" />
-    <aui:option label="Agent / Broker / Trader / Contractor" value="Agent / Broker / Trader / Contractor" />
-    <aui:option label="Business Owner / Entrepreneur" value="Business Owner / Entrepreneur" />
-    <aui:option label="Politician" value="Politician" />
-    <aui:option label="Social Worker / Volunteer / NGO" value="Social Worker / Volunteer / NGO" />
-    <aui:option label="Sportsman" value="Sportsman" />
-    <aui:option label="Travel & Transport Professional" value="Travel & Transport Professional" />
-    <aui:option label="Writer" value="Writer" />
-    <aui:option label="Safety Officer" value="Safety Officer" />
-    <aui:option label="Postal Assistant" value="Postal Assistant" />
-    <aui:option label="Other" value="Other" />
-    <aui:option label="Retired" value="Retired" />
-    <aui:option label="Student" value="Student" />
-    <aui:option label="Not working" value="Not working" />
+     <%
+    	for(ListTypeEntry occupation: occupationsList){
+    %>
+    	<aui:option label="<%= occupation.getName(themeDisplay.getLocale()) %>" value="<%= occupation.getKey() %>" />
+    <% } %>
 </aui:select>
 
 
@@ -393,15 +265,13 @@
 										</div>
 															<div class="form-group">
 
-										<aui:select label="Mother Tongue Language" name="MothertongueLanguage" id="MothertongueLanguage">
+										<aui:select label="mother-tongue-language" name="MothertongueLanguage" id="MothertongueLanguage">
 											<aui:option value="">Select Language</aui:option>
-											<aui:option label="Tamil" value="Tamil" />
-											<aui:option label="Urdu" value="Urdu" />
-											<aui:option label="Kanadam" value="Kanadam" />
-											<aui:option label="Malayalam" value="Malayalam" />
-											<aui:option label="Telugu" value="Telugu" />
-											<aui:option label="Arwi" value="Arwi" />
-											<aui:option label="Urdu & Tamil" value="Urdu & Tamil" />
+											<%
+												for(ListTypeEntry motherTongue: motherTongueList){
+											%>
+												<aui:option label="<%= motherTongue.getName(themeDisplay.getLocale()) %>" value="<%= motherTongue.getKey() %>" />
+											<%} %>
 											
 										</aui:select>
 									</div>
@@ -413,45 +283,16 @@
     </aui:input> --%>
 
     <!-- Dropdown for height -->
-    <aui:select name="height" label="Select Your Height" id="height">
+    <aui:select name="height" label="select-your-height" id="height">
         <aui:option value="">Select</aui:option>
-        <aui:option value="121">4ft - 121 cm</aui:option>
-        <aui:option value="124">4ft 1in - 124cm</aui:option>
-        <aui:option value="127">4ft 2in - 127cm</aui:option>
-        <aui:option value="129">4ft 3in - 129cm</aui:option>
-        <aui:option value="132">4ft 4in - 132cm</aui:option>
-        <aui:option value="134">4ft 5in - 134cm</aui:option>
-        <aui:option value="137">4ft 6in - 137cm</aui:option>
-        <aui:option value="139">4ft 7in - 139cm</aui:option>
-        <aui:option value="142">4ft 8in - 142cm</aui:option>
-        <aui:option value="144">4ft 9in - 144cm</aui:option>
-        <aui:option value="147">4ft 10in - 147cm</aui:option>
-        <aui:option value="149">4ft 11in - 149cm</aui:option>
-        <aui:option value="152">5ft - 152cm</aui:option>
-        <aui:option value="154">5ft 1in - 154cm</aui:option>
-        <aui:option value="157">5ft 2in - 157cm</aui:option>
-        <aui:option value="160">5ft 3in - 160cm</aui:option>
-        <aui:option value="162">5ft 4in - 162cm</aui:option>
-        <aui:option value="165">5ft 5in - 165cm</aui:option>
-        <aui:option value="167">5ft 6in - 167cm</aui:option>
-        <aui:option value="170">5ft 7in - 170cm</aui:option>
-        <aui:option value="172">5ft 8in - 172cm</aui:option>
-        <aui:option value="175">5ft 9in - 175cm</aui:option>
-        <aui:option value="177">5ft 10in - 177cm</aui:option>
-        <aui:option value="180">5ft 11in - 180cm</aui:option>
-        <aui:option value="182">6ft - 182cm</aui:option>
-        <aui:option value="185">6ft 1in - 185cm</aui:option>
-        <aui:option value="187">6ft 2in - 187cm</aui:option>
-        <aui:option value="190">6ft 3in - 190cm</aui:option>
-        <aui:option value="193">6ft 4in - 193cm</aui:option>
-        <aui:option value="195">6ft 5in - 195cm</aui:option>
-        <aui:option value="198">6ft 6in - 198cm</aui:option>
-        <aui:option value="200">6ft 7in - 200cm</aui:option>
-        <aui:option value="203">6ft 8in - 203cm</aui:option>
-        <aui:option value="205">6ft 9in - 205cm</aui:option>
-        <aui:option value="208">6ft 10in - 208cm</aui:option>
-        <aui:option value="210">6ft 11in - 210cm</aui:option>
-        <aui:option value="213">7ft - 213cm</aui:option>
+        <%
+        	for(ListTypeEntry height: heightList){
+        %>
+        	<aui:option value="<%= height.getKey() %>"><%= height.getName(themeDisplay.getLocale())  %></aui:option>
+        
+        <% } %>
+        
+        
     </aui:select>
 <script>
 document.getElementById('heightDropdown').addEventListener('change', function() {
@@ -489,102 +330,32 @@ document.getElementById('height').addEventListener('input', function() {
 										<div class="form-group">
 											<div id="matrimony">
 							<%
-							String countryCode = "IN";
-							Country country = CountryLocalServiceUtil.getCountryByA2(20096, countryCode);	
-												
-							long countryId = country.getCountryId();
-							DynamicQuery dynamicQuery = RegionLocalServiceUtil.dynamicQuery();
-							dynamicQuery.add(RestrictionsFactoryUtil.eq("countryId", countryId));
-							List<Region> regions = RegionLocalServiceUtil.dynamicQuery(dynamicQuery);
+							
+							Country country = CountryLocalServiceUtil.getCountryByA2(themeDisplay.getCompanyId(), 
+									UmmatMatriAccountPortletKeys.INDIA_COUNTRY_CODE);	
+						
+							List<Region> regions = RegionLocalServiceUtil.getRegions(country.getCountryId(), true);
+									
 							
 			                %>
-							<%-- <aui:select name="country" label="Select country"
-								id="selectedCountry">
-								<aui:option value="">Select Country</aui:option>
-								<%
-								for (Country countryItems : countries) {
-								%>
-								<aui:option value="<%=countryItems.getCountryId()%>"><%=countryItems.getName().toUpperCase()%></aui:option>
-								<%
-								}
-								%>
-							</aui:select>
-							<aui:script>
-							$("#<portlet:namespace />selectedCountry").on("change",selectedCountry);
-							    function selectedCountry(){
-								 console.log($("#<portlet:namespace />selectedCountry").val());
-								         Liferay.Service(
-										'/region/get-regions',
-										{
-						    				countryId: $('#<portlet:namespace />selectedCountry').val()
-										},
-										function(data) {
-						    			console.log(data);
-						    			var stateNameList = data;
-						    			$('#<portlet:namespace />selectedState').empty();
-						    			for(var i in stateNameList) {
-						    			$('#<portlet:namespace />selectedState').append("<option value='"+ stateNameList[i].regionId +"'>"+stateNameList[i].title+"</option>");
-	    										}
-									}
-							);
-								   	}
-						</aui:script> --%>
-							<aui:select name="state" label="Select state" id="selectedState">
+							
+							<aui:select name="state" label="state" id="selectedState" onChange="populateDistrict(this)">
 								<aui:option value="">Select State</aui:option>
 								<%
 									for (Region stateListItem : regions ) {	    
 							     	%>
-									<option value="<%=stateListItem.getRegionCode()%>"><%=stateListItem.getName()%></option>
+									<option value="<%=stateListItem.getRegionId()%>"><%=stateListItem.getName()%></option>
 								<%
 								   }
 							        %>	
 									
-								<aui:script>
-						$("#<portlet:namespace />selectedState").on("change",selectedState);
-						 function selectedState(){
-							 var stateId = $("#<portlet:namespace />selectedState").val();
-							 Liferay.Service(
-										'/district/get-by-region-code',
-										{
-						    				regionCode: stateId
-										},
-										function(data) {
-						    			console.log(data);
-									var districtNameList = data;
-					    			$('#<portlet:namespace />selectedDistrict').empty();
-					    			$('#<portlet:namespace />availableLocality').empty();
-					    			for(var i in districtNameList) {
-					    			$('#<portlet:namespace />selectedDistrict').append("<option value='"+ districtNameList[i].districtId +"'>"+districtNameList[i].name+"</option>");
-					    			}
-					    			}
-									);
-		 }
-						</aui:script>
+								
 												</aui:select>
-							<aui:select name="district" label="District"
-								id="selectedDistrict">
+							<aui:select name="district" label="district"
+								id="selectedDistrict" onChange="populateLocality(this)">
 								<aui:option value="">Select District</aui:option>
 							</aui:select>
-							<aui:script>
-						$("#<portlet:namespace />selectedDistrict").on("change",selectedDistrict);
-						 function selectedDistrict(){
-							 var districtId = $("#<portlet:namespace />selectedDistrict").val();
-							 Liferay.Service(
-										'/locality/get-locality-by-district-id',
-										{
-						    				districtId: districtId
-										},
-										function(data) {
-						    			console.log(data);
-									var areaNameList = data;
-					    			$('#<portlet:namespace />availableLocality').empty();
-					    			for(var i in areaNameList) {
-					    			$('#<portlet:namespace />availableLocality').append("<option value='"+ areaNameList[i].name +"'>"+areaNameList[i].name+"</option>");
-					    			}
-					    			}
-									);
-		 }
-						</aui:script>
+							
 						
 							<aui:select name="area" label="Area" id="availableLocality">
 								<aui:option value="">Select Area</aui:option>
@@ -653,6 +424,38 @@ function validateMobileNumber(input) {
     } else {
         errorSpan.style.display = "none";
     }
+}
+function populateDistrict(element){
+	var selectedState = $(element).val();
+	
+	$.ajax({
+        url:'<%= districtUrl.toString() %>',
+        type:"POST",
+        data: {
+        	"<portlet:namespace />regionId": selectedState
+        },
+        
+        success:function(response){
+       	  $('#<portlet:namespace/>selectedDistrict').html(response);
+       	  $('#<portlet:namespace/>availableLocality').html('<option value="">Select Area</option>');
+      }
+	});
+}
+
+function populateLocality(element){
+	var selectedDistrict = $(element).val();
+	
+	$.ajax({
+        url:'<%= localityUrl.toString() %>',
+        type:"POST",
+        data: {
+        	"<portlet:namespace />districtId": selectedDistrict
+        },
+        
+        success:function(response){
+       	  $('#<portlet:namespace/>availableLocality').html(response);
+      }
+	});
 }
 
 </script>
