@@ -52,6 +52,7 @@ import com.ummat.slayer.service.LocalityLocalService;
 import com.ummat.slayer.service.LocalityLocalServiceUtil;
 import com.ummat.slayer.service.persistence.DistrictPersistence;
 import com.ummat.slayer.service.persistence.LocalityPersistence;
+import com.ummat.slayer.service.persistence.MatriImagesPersistence;
 
 import java.io.Serializable;
 
@@ -567,6 +568,9 @@ public abstract class LocalityLocalServiceBaseImpl
 
 	@Reference
 	protected LocalityPersistence localityPersistence;
+
+	@Reference
+	protected MatriImagesPersistence matriImagesPersistence;
 
 	@Reference
 	protected com.liferay.counter.kernel.service.CounterLocalService

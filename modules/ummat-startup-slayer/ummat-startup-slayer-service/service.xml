@@ -37,4 +37,39 @@
 		</finder>
 	</entity>
 	
+	<entity local-service="true" name="MatriImages" remote-service="true" uuid="true">
+
+		<!-- PK fields -->
+
+		<column name="id" primary="true" type="long" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="dlEntryId" type="long" />
+		
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="modifiedDate" />
+		</order>
+		
+		<finder return-type="Collection" name="userId">
+			<finder-column name="userId"></finder-column>
+		</finder>
+
+	</entity>
+	
 </service-builder>

@@ -31,6 +31,7 @@ import com.ummat.slayer.service.DistrictService;
 import com.ummat.slayer.service.DistrictServiceUtil;
 import com.ummat.slayer.service.persistence.DistrictPersistence;
 import com.ummat.slayer.service.persistence.LocalityPersistence;
+import com.ummat.slayer.service.persistence.MatriImagesPersistence;
 
 import java.lang.reflect.Field;
 
@@ -145,6 +146,9 @@ public abstract class DistrictServiceBaseImpl
 
 	@Reference
 	protected LocalityPersistence localityPersistence;
+
+	@Reference
+	protected MatriImagesPersistence matriImagesPersistence;
 
 	@Reference
 	protected com.liferay.counter.kernel.service.CounterLocalService

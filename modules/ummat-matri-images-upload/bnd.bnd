@@ -1,0 +1,4 @@
+Bundle-Name: ummat-matri-images-upload
+Bundle-SymbolicName: com.ummat.matri.images.upload
+Bundle-Version: 1.0.0
+Export-Package: com.ummat.matri.images.upload.constants
