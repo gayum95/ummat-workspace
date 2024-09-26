@@ -1,5 +1,12 @@
 package ummat.users.auth.portlet;
 
+import javax.portlet.Portlet;
+import javax.portlet.PortletException;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
+
 import com.liferay.list.type.model.ListTypeDefinition;
 import com.liferay.list.type.model.ListTypeEntry;
 import com.liferay.list.type.service.ListTypeDefinitionLocalService;
@@ -20,19 +27,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-import javax.portlet.Portlet;
-import javax.portlet.PortletException;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
-import javax.portlet.ResourceRequest;
-import javax.portlet.ResourceResponse;
-
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 import ummat.users.auth.constants.UmmatMatriAccountPortletKeys;
 
-@Component(immediate = true, property = { "com.liferay.portlet.display-category=Matrimony",
+@Component(immediate = true, property = { "com.liferay.portlet.display-category=category.sample",
 		"com.liferay.portlet.instanceable=false", "javax.portlet.display-name=UmmatMatriCreateAccount",
 		"javax.portlet.init-param.template-path=/", "javax.portlet.init-param.view-template=/Matri/create_account.jsp",
 		"javax.portlet.name=" + UmmatMatriAccountPortletKeys.MATRI_CREATE_ACCOUNT,
@@ -102,6 +102,7 @@ public class UmmatMatriAccountPortlet extends MVCPortlet {
 		
 	}
 	
+	
 	@Override
 	public void serveResource(ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 			throws IOException, PortletException {
@@ -163,7 +164,6 @@ public class UmmatMatriAccountPortlet extends MVCPortlet {
 		super.serveResource(resourceRequest, resourceResponse);
 	}
 	
-	
 	@Reference
 	private ListTypeDefinitionLocalService _listTypeDefinitionLocalService;
 
@@ -171,12 +171,12 @@ public class UmmatMatriAccountPortlet extends MVCPortlet {
 	private ListTypeEntryLocalService _listTypeEntryLocalService;
 	
 	@Reference
-	private DistrictLocalService _districtLocalService;
-	
-	@Reference
 	private LocalityLocalService _localityLocalService;
 	
+	@Reference
+	private DistrictLocalService _districtLocalService;
 	
 	private static final Log log = LogFactoryUtil.getLog(UmmatMatriAccountPortlet.class.getName());
+
 
 }

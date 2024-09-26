@@ -1,36 +1,36 @@
-.card-0 {
+#matri_Create_Acc.card-0 {
 	min-height: 110vh;
 	background: linear-gradient(-20deg, rgb(255, 255, 255) 50%, #044626 50%);
 	color: #ffe830ed;
 	border: 0px;
 }
 
-p {
+#matri_Create_Acc p {
 	font-size: 15px;
 	line-height: 25px !important;
 	font-weight: 500;
 }
 
 
-.btn {
+#matri_Create_Acc .btn {
 	letter-spacing: 1px;
 }
 
-#password, #confirm_password {
+#matri_Create_Acc #password, #matri_Create_Acc #confirm_password {
 	width: 50%;
 }
 
-select:active {
+#matri_Create_Acc select:active {
 	box-shadow: none !important;
 	outline-width: 0 !important;
 }
 
-select:after {
+#matri_Create_Acc select:after {
 	box-shadow: none !important;
 	outline-width: 0 !important;
 }
 
-input, textarea {
+#matri_Create_Acc input, #matri_Create_Acc textarea {
 	padding: 10px 12px 10px 12px;
 	border: 1px solid lightgrey;
 	border-radius: 0px !important;
@@ -44,20 +44,20 @@ input, textarea {
 	resize: none;
 }
 
-select:focus, input:focus {
+#matri_Create_Acc select:focus, #matri_Create_Acc input:focus {
 	box-shadow: none !important;
 	border: 1px solid #2196F3 !important;
 	outline-width: 0 !important;
 	font-weight: 400
 }
 
-label {
+#matri_Create_Acc label {
 	margin-bottom: 2px;
 	font-weight: bolder;
 	font-size: 14px;
 }
 
-input:focus, textarea:focus {
+#matri_Create_Acc input:focus, #matri_Create_Acc textarea:focus {
 	-moz-box-shadow: none !important;
 	-webkit-box-shadow: none !important;
 	box-shadow: none !important;
@@ -65,27 +65,27 @@ input:focus, textarea:focus {
 	outline-width: 0
 }
 
-button:focus {
+#matri_Create_Acc button:focus {
 	-moz-box-shadow: none !important;
 	-webkit-box-shadow: none !important;
 	box-shadow: none !important;
 	outline-width: 0
 }
 
-.form-control {
+#matri_Create_Acc .form-control {
 	height: calc(2em + .75rem + 3px);
 }
 
-.inner-card {
+#matri_Create_Acc .inner-card {
 	margin: 0px 0px 70px 0px;
 }
 
-.card-0 {
+#matri_Create_Acc.card-0 {
 	margin-top: 50px;
 	margin-bottom: 0px;
 }
 
-.card-1 {
+#matri_Create_Acc .card-1 {
 	border-radius: 10px;
 	color: #ebb652;
 	box-shadow: 2px 4px 15px 0px rgba(230, 194, 110, 0.5) !important;
@@ -93,15 +93,15 @@ button:focus {
 	margin-top: -87px;
 }
 
-#file {
+#matri_Create_Acc #file {
 	border: 2px dashed #92b0b3 !important;
 }
 
-.color input {
+#matri_Create_Acc .color input {
 	background-color: #f1f1f1;
 }
 
-.files:before {
+#matri_Create_Acc .files:before {
 	position: absolute;
 	bottom: 60px;
 	left: 0;
@@ -113,7 +113,7 @@ button:focus {
 	text-align: center;
 }
 
-#file {
+#matri_Create_Acc #file {
 	display: inline-block;
 	width: 100%;
 	padding: 95px 0 0 100%;
@@ -122,34 +122,34 @@ button:focus {
 	background-size: 55px 55px;
 }
 
-.card, .card-horizontal {
+#matri_Create_Acc .card, #matri_Create_Acc .card-horizontal {
 	overflow-wrap: break-word;
 	word-wrap: break-word;
 	background-color: #f5e1a3;
 }
 
-.font-weight-bold.ml-md-0.mx-auto.text-center.text-sm-left {
+#matri_Create_Acc .font-weight-bold.ml-md-0.mx-auto.text-center.text-sm-left {
 	margin-top: -100px;
 }
 
 @media ( min-width : 576px) {
-	.text-sm-left {
+	#matri_Create_Acc .text-sm-left {
 		text-align: center !important;
 	}
 }
 
-.form-control:hover {
+#matri_Create_Acc .form-control:hover {
 	border-color: #4eda27;
 }
 
-.form-control {
+#matri_Create_Acc .form-control {
 	height: calc(2em + .75rem + 3px); /* Adjust height as needed */
 	border: 2px solid #60a824ba; /* Add a light border */
 	transition: border-color 0.3s ease;
 	/* Add transition for smooth hover effect */
 }
 
-label {
+#matri_Create_Acc label {
 	color: #105701;
 	font-size: 0.875rem;
 	font-weight: var(- -font-weight-semi-bold, 600);
@@ -160,14 +160,14 @@ label {
 }
 
 @media ( min-width : 992px) {
-	.col-lg-5 {
+	#matri_Create_Acc .col-lg-5 {
 		flex: 0 0 calc(5/ 12 * 100%);
 		max-width: calc(5/ 12 * 100%);
 		margin-top: 54px;
 	}
 }
 
-.search-input {
+#matri_Create_Acc .search-input {
 	position: absolute;
 	top: 0px;
 	right: 189px;
@@ -177,7 +177,7 @@ label {
 	margin-left: 367px;
 }
 
-#img_url {
+#matri_Create_Acc #img_url {
 	background: #ddd;
 	min-width: 8rem;
 	min-height: 10rem;
@@ -186,7 +186,7 @@ label {
 	height: 8rem;
 	width: 8rem;
 }
-#img_url {
+#matri_Create_Acc #img_url {
 	background: #ddd;
 	min-width: 8rem;
 	min-height: 10rem;
@@ -195,16 +195,20 @@ label {
 	height: 8rem;
 	width: 8rem;
 }
-.btn.btn-primary.btn-block {
+#matri_Create_Acc .btn.btn-primary.btn-block {
   background-color: green;
   margin-left: -136px;
   margin-top: -18px;
   padding: 11px;
   width: 168px;
 }
-.font-weight-bold {
+#matri_Create_Acc .font-weight-bold {
   font-weight: 732 !important;
   font-size: 17px;
   font-style: oblique;
   color:#fff;
+}
+#matri_Create_Acc .pt-9{
+	padding-top: 9rem !important;
+	
 }
